@@ -1,0 +1,91 @@
+body {
+  font-family: "Rubik", sans-serif;
+  font-weight: 300;
+  margin: 50px 50px 0 50px;
+  background-color: #faf9f6;
+  display: flex;
+  flex-direction: column;
+  min-height: 95vh;
+}
+.main {
+  flex: 1;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 10px;
+  margin-left: 0;
+  font-weight: 300;
+}
+
+footer {
+  text-align: right;
+  color: midnightblue;
+}
+.tile-image {
+  height: 200px;
+  float: left;
+  margin-right: 45px;
+  margin-top: 45px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+.card {
+  width: 45%;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.creative {
+  color: midnightblue;
+}
+@media (max-width: 680px) {
+  .logo {
+    width: 200px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  h2 {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .card {
+    width: 100%;
+    display: block;
+
+    text-align: justify;
+  }
+
+  .card img {
+    width: 100%;
+    display: inline;
+    object-fit: cover;
+  }
+
+  .tile-image {
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-weight: 500;
+  }
+
+  img {
+    border-radius: 10px;
+  }
+}
