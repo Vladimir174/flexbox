@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("gtw.woff") format("woff2"), url("gtw.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "MyCustomFont", sans-serif;
+}

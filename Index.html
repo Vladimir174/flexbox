@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Данные из Excel</title>
+    <link rel="stylesheet" href="font-css.css" />
+    <style>
+      body {
+        margin: 20px;
+        background-image: url("14885.jpg");
+        background-repeat: repeat; /* предотвращает повтор изображения по горизонтали и вертикали */
+        background-size: cover; /* масштабирует изображение, чтобы оно покрывало весь экран */
+        background-position: center; /* располагает изображение по центру */
+      }
+      table {
+        width: 80%;
+        border-collapse: collapse;
+        margin: 10px 0;
+        font-size: 14px;
+        text-align: left;
+
+        border-radius: 22px;
+        background-color: transparent;
+      }
+      table th,
+      table td {
+        padding: 8px;
+        border: none;
+      }
+
+      td:not(:first-child),
+      th:not(:first-child) {
+        border-left: 1px solid black; /* Вертикальные линии */
+      }
+
+      tr:not(:last-child) td,
+      tr:not(:last-child) th {
+        border-bottom: 1px solid black; /* Горизонтальные линии */
+      }
+
+      td:nth-child(1),
+      th:nth-child(1) {
+        border-left: none; /* Удаление левой границы у первой колонки */
+      }
+      h1 {
+        font-size: 18px;
+        border-radius: 5px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Задолжность (Автомобиль) </br>300 000 тыс. руб.</h1>
+    <table id="excel-table">
+      <thead>
+        <tr>
+          <th>Дата</th>
+          <th>Обоснование</th>
+          <th>Сумма руб.</th>
+          <th>Остаток руб.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Данные из Excel будут вставлены сюда -->
+      </tbody>
+    </table>
+
+    <!-- Подключаем библиотеку SheetJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script>
+      // Функция для загрузки Excel файла из того же каталога
+      function loadExcelFile() {
+        fetch("sample_data.xlsx") // Замените на имя вашего файла Excel
+          .then((response) => response.arrayBuffer())
+          .then((data) => {
+            const workbook = XLSX.read(data, { type: "array" });
+            const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+            const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+
+            const tbody = document.querySelector("#excel-table tbody");
+            tbody.innerHTML = ""; // Очищаем таблицу перед вставкой новых данных
+
+            jsonData.forEach((row) => {
+              const tr = document.createElement("tr");
+              tr.innerHTML = `
+                            <td>${row["Дата"]}</td>
+                            <td>${row["Обоснование"]}</td>
+                            <td>${row["Сумма"]}</td>
+                            <td>${row["Остаток"]}</td>
+                        `;
+              tbody.appendChild(tr);
+            });
+          })
+          .catch((error) => {
+            console.error("Ошибка загрузки Excel файла:", error);
+          });
+      }
+
+      // Загружаем Excel файл при открытии страницы
+      window.onload = loadExcelFile;
+    </script>
+  </body>
+</html>
